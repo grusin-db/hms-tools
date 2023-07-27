@@ -1,0 +1,26 @@
+[project]
+name = "hms-tools"
+version = "0.0.1"
+authors = [
+  { name="Grzegorz Rusin", email="grzegorz.rusin@databricks.com" },
+]
+description = "Hive Metastore Tooling (Export, Import, Sync, DDL creation, etc...)"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/grusin-db/hms-tools"
+"Bug Tracker" = "https://github.com/grusin-db/hms-tools/issues"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["hmstools"]
