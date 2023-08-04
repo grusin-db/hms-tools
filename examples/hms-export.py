@@ -3,6 +3,10 @@
 
 # COMMAND ----------
 
+# MAGIC %md ### based on reference: https://spark.apache.org/docs/latest/sql-ref-syntax.html#auxiliary-statements
+
+# COMMAND ----------
+
 # DBTITLE 1,helper functions
 import functools
 from typing import List, Dict, Callable, Any, Union
@@ -150,7 +154,28 @@ for name, excption in bad_scripts.items():
 
 # DBTITLE 1,fail if errors were found
 if len(bad_scripts) > 0:
-  raise ValueError("some tables failed, fix them and try again...")fr 
+  raise ValueError("some tables failed, fix them and try again...")
+
+# COMMAND ----------
+
+# DBTITLE 1,Get create schema script
+create_db_names_script = [
+  f"CREATE SCHEMA IF NOT EXISTS `{x}`" 
+  for x in db_names
+]
+
+create_db_names_script
+
+# COMMAND ----------
+
+import json
+
+good_json = json.dumps(create_db_names_script, indent=2)
+dbutils.fs.put('dbfs:/hms-export/databases_create_schemas.json', good_json, True)
+
+# COMMAND ----------
+
+# MAGIC %fs head dbfs:/hms-export/databases_create_schemas.json
 
 # COMMAND ----------
 
@@ -166,7 +191,7 @@ import json
 
 good_json = json.dumps(good_scripts, indent=2)
 
-dbutils.fs.put('dbfs:/hms-export/tables_and_views.json', good_json)
+dbutils.fs.put('dbfs:/hms-export/tables_and_views.json', good_json, True)
 
 # COMMAND ----------
 
