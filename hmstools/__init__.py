@@ -8,6 +8,3 @@ sql = spark.sql
 
 from pyspark.dbutils import DBUtils
 dbutils = DBUtils(spark)
-
-
-
