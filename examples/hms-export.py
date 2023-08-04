@@ -154,6 +154,14 @@ if len(bad_scripts) > 0:
 
 # COMMAND ----------
 
+# DBTITLE 1,Optionally add CREATE OR REPLACE TABLE instead of CREATE TABLE
+good_scripts = {
+  name: script.replace("CREATE TABLE", "CREATE OR REPLACE TABLE", 1)
+  for name, script in good_scripts.items()
+}
+
+# COMMAND ----------
+
 import json
 
 good_json = json.dumps(good_scripts, indent=2)
